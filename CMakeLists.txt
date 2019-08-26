@@ -5,13 +5,27 @@ project (OpenGR LANGUAGES CXX VERSION 1.1.3)
 ## User options
 ################################################################################
 # Set option to enable timing recording
-OPTION (OpenGR_COMPILE_TESTS "Enable testing" TRUE)
+OPTION (OpenGR_COMPILE_TESTS "Enable testing" FALSE)
 OPTION (OpenGR_COMPILE_DEMOS "Compile demo applications (including the Super4PCS standalone)" TRUE)
 OPTION (IO_USE_BOOST "Use boost::filesystem for texture loading" TRUE)
 OPTION (ENABLE_TIMING "Enable computation time recording" FALSE)
 OPTION (OpenGR_USE_CHEALPIX "Use Chealpix for orientation filtering (deprecated)" FALSE)
 OPTION (DL_DATASETS "Download demo datasets and associated run scripts" FALSE)
 OPTION (OpenGR_USE_WEIGHTED_LCP "Use gaussian weights for point samples when computing LCP" FALSE)
+
+find_package( PCL 1.8 QUIET COMPONENTS common io search visualization)
+# [C/C++]>[General]>[Additional Include Directories]
+include_directories( ${PCL_INCLUDE_DIRS} )
+
+# [C/C++]>[Preprocessor]>[Preprocessor Definitions]
+add_definitions( ${PCL_DEFINITIONS} )
+
+# For Use Not PreCompiled Features
+#add_definitions( -DPCL_NO_PRECOMPILE )
+
+# [Linker]>[General]>[Additional Library Directories]
+link_directories( ${PCL_LIBRARY_DIRS} )
+
 
 ################################################################################
 ## DO NOT EDIT AFTER THIS LINE
@@ -93,20 +107,10 @@ endif(OpenGR_USE_CHEALPIX)
 ##  1. if EIGEN3_INCLUDE_DIR is set, use it directly
 ##  2. if any, and version >= 3.3.x, use system version
 ##  3. otherwise, download (if required) and use submodule
-if( NOT EIGEN3_INCLUDE_DIR )
-    find_package(Eigen3 QUIET)
-    if( (NOT Eigen3_FOUND) OR EIGEN_VERSION_NUMBER VERSION_LESS 3.3 )
+find_package(Eigen )
 
-        set(EIGEN3_INCLUDE_DIR "${PROJECT_SOURCE_DIR}/3rdparty/Eigen")
-
-        if( NOT EXISTS ${EIGEN3_INCLUDE_DIR}/signature_of_eigen3_matrix_library )
-            execute_process(COMMAND git submodule update --init -- ${EIGEN3_INCLUDE_DIR}
-                    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
-        endif( NOT EXISTS ${EIGEN3_INCLUDE_DIR}/signature_of_eigen3_matrix_library )
-    endif()
-endif( NOT EIGEN3_INCLUDE_DIR )
-include_directories(${EIGEN3_INCLUDE_DIR})
-message(STATUS "Eigen3 root path: ${EIGEN3_INCLUDE_DIR}")
+include_directories(${EIGEN_INCLUDE_DIR})
+message(STATUS "Eigen3 root path: ${EIGEN_INCLUDE_DIR}")
 
 ## Eigen: automatic configuration:
 ##  1. if EIGEN3_INCLUDE_DIR is set, use it directly
