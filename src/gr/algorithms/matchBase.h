@@ -109,7 +109,7 @@ public:
         // \FIXME std::pair <Scalar, Scalar> scale_range;
     };
 
-    using OptionsType = gr::Utils::CRTP < OptExts ... , Options >;
+    using OptionsType = typename gr::Utils::crtp::make_base < OptExts ... , Options >::type;
 
 
     EIGEN_MAKE_ALIGNED_OPERATOR_NEW

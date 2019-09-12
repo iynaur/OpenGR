@@ -51,12 +51,6 @@ namespace gr{
         /// CRTP class designed by Gael Guennebaud
         /// Source: http://disq.us/p/1tf4a7l
         ///         https://www.onlinegdb.com/rJEhwUc-m
-        template< template <class> class... Bases>
-        struct CRTP : public crtp::make_base<Bases...>::type
-        {
-//            using Base = typename crtp::make_base<CRTP,Bases...>::type;
-        };
-
     } // namespace Utils
 } // namespace gr
 
