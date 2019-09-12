@@ -35,7 +35,7 @@ namespace gr {
     template <template <typename, typename> typename _Functor,
               typename _TransformVisitor,
               typename _PairFilteringFunctor,  /// <\brief Must implements PairFilterConcept
-              template < class, class > typename PairFilteringOptions >
+              template < /*class,*/ class > typename PairFilteringOptions >
     class Match4pcsBase : public CongruentSetExplorationBase<Traits4pcs, _TransformVisitor, _PairFilteringFunctor, PairFilteringOptions> {
     public:
         using Scalar            = typename Point3D::Scalar;

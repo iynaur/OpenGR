@@ -16,7 +16,7 @@ namespace gr {
     /// \implements PairFilterConcept
     ///
     struct DummyPointFilter {
-    template < class Derived, class TBase>
+    template < /*class Derived,*/ class TBase>
     struct Options : public TBase {
       bool dummyFilteringResponse;
       enum { IS_DUMMYPOINTFILTER_OPTIONS = true };
@@ -39,7 +39,7 @@ namespace gr {
     /// \implements PairFilterConcept
     ///
     struct AdaptivePointFilter {
-      template < class Derived, class TBase>
+      template < /*class Derived,*/ class TBase>
       struct Options : public TBase {
         using Scalar = typename TBase::Scalar;
 

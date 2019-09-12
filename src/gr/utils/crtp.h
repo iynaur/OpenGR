@@ -29,21 +29,21 @@ namespace gr{
         namespace crtp {
             struct EmptyBaseClass {};
 
-            template<class Derived,
-                     template <class,class> class... Bases>
+            template</*class Derived,*/
+                     template <class> class... Bases>
             struct make_base;
 
-            template<class Derived,
-                     template <class,class> class Base>
-            struct make_base<Derived,Base> {
-                typedef Base<Derived,EmptyBaseClass > type;
+            template</*class Derived,*/
+                     template <class> class Base>
+            struct make_base<Base> {
+                typedef Base<EmptyBaseClass > type;
             };
 
-            template<class Derived,
-                     template <class,class> class... Bases,
-                     template <class,class> class Base0>
-            struct make_base<Derived,Base0,Bases...> {
-                typedef Base0<Derived,typename make_base<Derived,Bases...>::type> type;
+            template</*class Derived,*/
+                     template <class> class... Bases,
+                     template <class> class Base0>
+            struct make_base<Base0,Bases...> {
+                typedef Base0<typename make_base<Bases...>::type> type;
             };
         }
 #endif
@@ -51,10 +51,10 @@ namespace gr{
         /// CRTP class designed by Gael Guennebaud
         /// Source: http://disq.us/p/1tf4a7l
         ///         https://www.onlinegdb.com/rJEhwUc-m
-        template< template <class,class> class... Bases>
-        struct CRTP : public crtp::make_base<CRTP<Bases...>,Bases...>::type
+        template< template <class> class... Bases>
+        struct CRTP : public crtp::make_base<Bases...>::type
         {
-            using Base = typename crtp::make_base<CRTP,Bases...>::type;
+//            using Base = typename crtp::make_base<CRTP,Bases...>::type;
         };
 
     } // namespace Utils

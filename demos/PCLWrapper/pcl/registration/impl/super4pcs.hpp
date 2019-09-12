@@ -46,7 +46,7 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 namespace pcl {
 template <typename PointSource, typename PointTarget> void
-pcl::Super4PCS<PointSource, PointTarget>::computeTransformation (PointCloudSource &output, const Eigen::Matrix4f& guess)
+Super4PCS<PointSource, PointTarget>::computeTransformation (PointCloudSource &output, const Eigen::Matrix4f& guess)
 {
   using namespace gr;
 

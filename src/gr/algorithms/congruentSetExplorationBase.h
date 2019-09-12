@@ -60,7 +60,7 @@
 namespace gr{
 
 
-template < class Derived, class TBase>
+template < /*class Derived,*/ class TBase>
 class CongruentSetExplorationOptions : public  TBase
 {
 public:
@@ -90,7 +90,7 @@ private:
 template <typename _Traits,
           typename _TransformVisitor,
           typename _PairFilteringFunctor, /// <\brief Must implements PairFilterConcept
-          template < class, class > class ... OptExts >
+          template < /*class,*/ class > class ... OptExts >
 class CongruentSetExplorationBase : public MatchBase<_TransformVisitor, OptExts ..., CongruentSetExplorationOptions> {
 
 public:

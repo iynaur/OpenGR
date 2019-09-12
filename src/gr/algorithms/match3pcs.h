@@ -26,7 +26,7 @@ namespace gr {
     /// Class for the computation of the 3PCS algorithm.
     template <typename _TransformVisitor,
               typename _PairFilteringFunctor,  /// <\brief Must implements PairFilterConcept
-              template < class, class > typename PairFilteringOptions >
+              template < /*class,*/ class > typename PairFilteringOptions >
     class Match3pcs : public CongruentSetExplorationBase<Traits3pcs, _TransformVisitor, _PairFilteringFunctor, PairFilteringOptions> {
     public:
       using Traits               = Traits3pcs;

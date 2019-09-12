@@ -70,7 +70,7 @@ struct DummyTransformVisitor {
 
 /// \brief Abstract class for registration algorithms
 template <typename _TransformVisitor = DummyTransformVisitor,
-          template < class, class > typename ... OptExts >
+          template < /*class,*/ class > typename ... OptExts >
 class MatchBase {
 
 public:
@@ -80,7 +80,7 @@ public:
     using LogLevel = Utils::LogLevel;
     using TransformVisitor = _TransformVisitor;
 
-    template < class Derived, class TBase>
+    template < /*class Derived,*/ class TBase>
     class Options : public TBase
     {
     public:
